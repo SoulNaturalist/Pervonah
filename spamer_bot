@@ -3,7 +3,7 @@ import time
 from random import randint
 
 #getting a token
-TOKEN = input('Введите токен:')
+TOKEN = input('vk token:')
 
 while True:
     #Time should not be changed
@@ -36,7 +36,7 @@ while True:
          api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess[randint(0,len(mess)-1,)])
 
 
-         print('Коментарий оставлен' + ' ' + str(strftime('[%H:%M:%S]')))
+         print('comment left' + ' ' + str(strftime('[%H:%M:%S]')))
 
          time.sleep(0.5)
 
@@ -48,6 +48,6 @@ while True:
     #error exception       
      except:
          from time import gmtime, strftime
-         print('Не удалось оставить комментарий' + ' ' + str(strftime('[%H:%M:%S]')))
+         print('eror/check the captcha' + ' ' + str(strftime('[%H:%M:%S]')))
          time.sleep(0.4)
 
