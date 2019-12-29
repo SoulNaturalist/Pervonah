@@ -1,2 +1,1 @@
-# spamer_vk_groups
-This script will spam groups Vkontakte
+1.First, you need to get a token Vkontakte.2.To enter in the ids.txt groups for which the bot will spam and also write this list of groups to the group_id variable.3.Next, write the spam text to the mess variable.4.Press f5 to run this script, enter a token, when leaving a comment, the script will display new comment in shell python
