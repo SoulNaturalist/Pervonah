@@ -1,6 +1,7 @@
 import vk
 import time
 from random import randint
+from time import gmtime, strftime
 
 #getting a token
 TOKEN = input('vk token:')
@@ -30,24 +31,18 @@ while True:
 
      #attempt to write a comment
      try:
-
-         from time import gmtime, strftime
-
          api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess[randint(0,len(mess)-1,)])
 
 
          print('comment left' + ' ' + str(strftime('[%H:%M:%S]')))
 
-         time.sleep(0.5)
-
-
      #error exception
      except vk.exceptions.VkAPIError:
+     pass
 
-        time.sleep(0.6)
+
     #error exception       
      except:
-         from time import gmtime, strftime
          print('eror/check the captcha' + ' ' + str(strftime('[%H:%M:%S]')))
-         time.sleep(0.4)
+        
 
