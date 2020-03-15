@@ -10,7 +10,7 @@ mess_unput = input('1 mess,2 mess,3 mess/messages:')
 group_unput = input('group_id1,group_id2/groups and write file ids.txt:')
 
 while True:
-    a = [1,2,35,2]
+    a = []
     #Time should not be changed
     time.sleep(15)
     session = vk.Session(access_token=TOKEN)
