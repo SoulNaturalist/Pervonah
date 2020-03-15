@@ -11,7 +11,6 @@ group_unput = input('group_id1,group_id2/groups and write file ids.txt:')
 
 while True:
     post_id_list = []
-    #Time should not be changed
     time.sleep(15)
     session = vk.Session(access_token=TOKEN)
     api = vk.API(session ,v='5.92', lang='ru')
