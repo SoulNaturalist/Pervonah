@@ -10,7 +10,7 @@ mess_unput = input('1 mess,2 mess,3 mess/messages:')
 group_unput = input('group_id1,group_id2/groups and write file ids.txt:')
 
 while True:
-    a = []
+    post_id_list = []
     #Time should not be changed
     time.sleep(15)
     session = vk.Session(access_token=TOKEN)
@@ -38,11 +38,11 @@ while True:
 
      try:
         postID 
-        if not postID  in a:
+        if not postID  in  post_id_list:
                 api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate)
                 print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' + mess_generate)
                 a.append(postID)
-        if postID in a:
+        if postID in post_id_list:
             pass
 
      except vk.exceptions.VkAPIError:
