@@ -39,7 +39,7 @@ while True:
         if not postID  in  post_id_list:
                 api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate)
                 print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' + mess_generate)
-                a.append(postID)
+                 post_id_list.append(postID)
         if postID in post_id_list:
             pass
 
