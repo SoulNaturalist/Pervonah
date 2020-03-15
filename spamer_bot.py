@@ -8,9 +8,9 @@ from array import *
 TOKEN = input('vk token:')
 mess_unput = input('1 mess,2 mess,3 mess/messages:')
 group_unput = input('group_id1,group_id2/groups and write file ids.txt:')
-
+a = []
 while True:
-    post_id_list = []
+    #Time should not be changed
     time.sleep(15)
     session = vk.Session(access_token=TOKEN)
     api = vk.API(session ,v='5.92', lang='ru')
@@ -26,7 +26,7 @@ while True:
     
     #generate random message
     mess_generate = mess[randint(0,len(mess)-1,)]
-    
+
     with open("ids.txt") as file:
 
         ids = file.read().split(",")
@@ -36,12 +36,15 @@ while True:
     for _ in range(len(ids)):
 
      try:
-        if not postID  in  post_id_list:
+        if not postID  in a:
                 api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate)
                 print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' + mess_generate)
-                 post_id_list.append(postID)
-        if postID in post_id_list:
+                a.append(postID)
+                
+    
+        if postID in a:
             pass
 
      except vk.exceptions.VkAPIError:
          pass
+
