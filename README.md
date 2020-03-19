@@ -1,1 +1,21 @@
-1.First, you need to get a token Vkontakte.2.To enter in the ids.txt groups for which the bot will spam and also write this list of groups to the group_id variable.3.Next, write the spam text to the mess variable.4.Press f5 to run this script, enter a token, when leaving a comment, the script will display new comment in shell python
+🛑PERVONAX BY SAYWEX🛑
+🛑VERSION 4.0.0🛑
+RU
+Инструкция:
+1.Качаем python💡
+2.Устанавливаем модуль vk(pip install vk)💡
+3.Запускаем(F5)💡
+4.Вводим токен💡
+5.Вводим сообщения💡
+6.Вводим id групп💡
+7.Вводим att если их не нужно использовать пишем - 💡
+EN
+1.Download python💡
+2.Installing the vk module (pip install vk)💡
+3.Launching(F5)💡
+4.Entering a token💡
+5.Entering messages💡
+6.Enter the group id💡
+7.Enter att if you don't need to use them write - 💡
+
+
