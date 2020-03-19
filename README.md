@@ -1,6 +1,8 @@
 🛑PERVONAX BY SAYWEX🛑
 🛑VERSION 4.0.0🛑
+
 RU
+
 Инструкция:
 
 1.Качаем python💡
