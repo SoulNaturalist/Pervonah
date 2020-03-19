@@ -9,7 +9,7 @@ from array import *
 TOKEN = input('vk token:')
 mess_unput = input('1 mess,2 mess,3 mess/messages:')
 group_unput = input('group_id1,group_id2/groups and write file ids.txt:')
-photos = input('photo348382404_457251335 or not photo write -/photos:')
+photos = input('photo348382404_457251335/video-156382468_456240807 or not photo write -:')
 a = []
 while True:
     #Time should not be changed
