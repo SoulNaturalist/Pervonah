@@ -12,7 +12,6 @@ group_unput = input('group_id1,group_id2/groups and write file ids.txt:')
 photos = input('photo348382404_457251335/video-156382468_456240807 or not photo write -:')
 a = []
 while True:
-    #Time should not be changed
     time.sleep(2.2)
     session = vk.Session(access_token=TOKEN)
     api = vk.API(session ,v='5.92', lang='ru')
