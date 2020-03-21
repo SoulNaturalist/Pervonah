@@ -6,7 +6,7 @@ from time import gmtime, strftime
 from array import *
 
 #getting a info
-TOKEN = input('vk token:')
+token = input('vk token:')
 mess_unput = input('1 mess,2 mess,3 mess/messages:')
 group_unput = input('group_id1,group_id2/groups and write file ids.txt:')
 photos = input('photo348382404_457251335/video-156382468_456240807 or not photo write -:')
