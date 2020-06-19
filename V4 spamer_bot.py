@@ -5,12 +5,15 @@ from random import randint
 from time import gmtime, strftime
 from array import *
 
-#getting a info
+
 token = input('vk token:')
+
 mess_unput = input('1 mess,2 mess,3 mess/messages:')
+
 group_unput = input('group_id1,group_id2/groups and write file ids.txt:')
+
 photos = input('photo348382404_457251335/video-156382468_456240807 or not photo write -:')
-a = []
+list_ids = []
 session = vk.Session(access_token=token)
 api = vk.API(session ,v='5.92', lang='ru')
 while True:
@@ -27,10 +30,10 @@ while True:
 
     photo = photos.split(',')
 
-    #generate random message
+
     mess_generate = mess[randint(0,len(mess)-1,)]
 
-    #generate random photo
+
     photo_generate = random.choice(photo)
     
     with open("ids.txt") as file:
@@ -40,21 +43,21 @@ while True:
     for _ in range(len(ids)):
         
         try:
-            if not postID  in a:
+            if not postID  in list_ids:
                 if photos == '-':
                     api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate)
                     print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' + mess_generate)
-                    a.append(postID)
+                    list_ids.append(postID)
                 elif photos == '':
                     api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate)
                     print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' + mess_generate)
-                    a.append(postID)
+                    list_ids.append(postID)
                 else:
                     api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate,attachments=photo_generate)
                     print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' + mess_generate)
-                    a.append(postID)
+                    list_ids.append(postID)
                     
-            if postID in a:
+            if postID in list_ids:
                 pass
 
         except vk.exceptions.VkAPIError:
