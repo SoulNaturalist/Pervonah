@@ -3,7 +3,7 @@ import random
 import time
 from random import randint
 from time import gmtime, strftime
-from array import *
+
 
 
 token = input('vk token:')
