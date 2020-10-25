@@ -20,9 +20,9 @@ while True:
     time.sleep(2.2)
     post = api.newsfeed.get(filters='post',counts=1,source_ids=group_unput.split(','))
     #get information about new posts
-    postID = post ['items'][0]['post_id']
+    postID = post['items'][0]['post_id']
 
-    sourceID = post ['items'][0]['source_id']
+    sourceID = post['items'][0]['source_id']
 
     like = post['items'][0]['likes']['user_likes']
 
