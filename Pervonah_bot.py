@@ -41,24 +41,21 @@ while True:
         ids = file.read().split(",")
         
     for _ in range(len(ids)):
-        
         try:
-            if not postID  in list_ids:
-                if photos == '-':
-                    api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate)
-                    print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' + mess_generate)
+            if postID not in list_ids:
+                if photos == '-' or photos == '':
                     list_ids.append(postID)
-                elif photos == '':
-                    api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate)
+                    comment = api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate)
+                    comment_id = comment['comment_id']
+                    api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
                     print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' + mess_generate)
-                    list_ids.append(postID)
+                
                 else:
-                    api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate,attachments=photo_generate)
-                    print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' + mess_generate)
                     list_ids.append(postID)
-                    
-            if postID in list_ids:
-                pass
-
+                    comment = api.wall.createComment(owner_id=ids[_-1],post_id=postID,message=mess_generate,attachments=photo_generate)
+                    comment_id = comment['comment_id'] 
+                    api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
+                    print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' + mess_generate)
+                   
         except vk.exceptions.VkAPIError:
             pass
