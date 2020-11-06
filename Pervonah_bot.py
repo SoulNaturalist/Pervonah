@@ -1,8 +1,6 @@
 import vk
 import random
 import time
-from datetime import datetime, timedelta
-from random import randint
 from time import gmtime, strftime
 
 
