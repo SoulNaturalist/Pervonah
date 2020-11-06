@@ -7,7 +7,7 @@ from time import gmtime, strftime
 
 
 
-token = '76beddabb91bc38a1c491763e0ec168a3034f8955e9c2e70bf51e129c6fa67da80fc017b669a28a2a06b7'
+token = 'Вставь сюда свой токен'
 
 mess_unput = [
     'Не понял',
