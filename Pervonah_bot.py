@@ -5,7 +5,7 @@ from time import gmtime, strftime
 
 
 
-token = 'Вставь сюда свой токен'
+token = 'Вставь свой токен'
 
 mess_unput = [
     'Не понял',
@@ -19,7 +19,7 @@ mess_unput = [
 ]
 
 photos = [
-    
+
 ]
 
 
@@ -50,7 +50,7 @@ while True:
         try:
             if postID not in list_ids:
                 message_text = random.choice(mess_unput)
-                if photos == '-' or photos == '':
+                if not photos:
                     list_ids.append(postID)
                     api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text)
                     #comment_id = comment['comment_id']
