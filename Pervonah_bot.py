@@ -52,17 +52,17 @@ while True:
                 message_text = random.choice(mess_unput)
                 if not photos:
                     list_ids.append(postID)
-                    api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text)
-                    #comment_id = comment['comment_id']
-                    #api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
+                    comment = api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text)
+                    comment_id = comment['comment_id']
+                    api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
                     print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' +  message_text)
                     
                 else:
                     random_photo = random.choice(photos)
                     list_ids.append(postID)
-                    api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text, attachments=random_photo)
-                    #comment_id = comment['comment_id'] 
-                    #api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
+                    comment = api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text, attachments=random_photo)
+                    comment_id = comment['comment_id'] 
+                    api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
                     print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' +  message_text)
         except vk.exceptions.VkAPIError as error:
             print(error)
