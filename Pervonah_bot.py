@@ -26,7 +26,7 @@ api.auth()
 
 api = api.get_api()
 
-groups  = api.groups.get(filter='groups, publics', count=500)
+groups  = api.groups.get(filter='groups, publics', count=200)
 
 groups_ids = groups['items'] 
 
@@ -45,28 +45,32 @@ while True:
 
         sourceID = post['items'][0]['owner_id']
         try:
-            try:
-                if postID not in list_ids:
-                    message_text = random.choice(mess_unput)
-                    if not photos:
-                        list_ids.append(postID)
-                        comment = api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text)
-                        comment_id = comment['comment_id']
-                        api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
-                        print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' +  message_text)
+            if postID not in list_ids:
+                message_text = random.choice(mess_unput)
+                if not photos:
+                    list_ids.append(postID)
+                    comment = api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text)
+                    comment_id = comment['comment_id']
+                    api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
+                    print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' +  message_text)
                         
-                    else:
-                        random_photo = random.choice(photos)
-                        list_ids.append(postID)
-                        comment = api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text, attachments=random_photo)
-                        comment_id = comment['comment_id'] 
-                        api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
-                        print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' +  message_text)
-            except api.exceptions.Captcha as captcha:
-                captcha.sid  
-                print(f'Появилась капча - {captcha.get_url()}')
-                captcha_key = input('Введите капчу:')
-                captcha.try_again(captcha_key)
-        except Exception as error:
-            print(f'Ошибка {error}')
+                else:
+                    random_photo = random.choice(photos)
+                    list_ids.append(postID)
+                    comment = api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text, attachments=random_photo)
+                    comment_id = comment['comment_id'] 
+                    api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
+                    print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' +  message_text)
+        except vk_api.exceptions.Captcha as captcha:
+            captcha.sid  
+            print(f'Появилась капча - {captcha.get_url()}')
+            captcha_key = input('Введите капчу:')
+            captcha.try_again(captcha_key)
+        except vk_api.exceptions.AccountBlocked:
+            print('Ваш аккаунт заблокировали')
+            break
+        except vk_api.exceptions.VkApiError:
+            pass
+
+
 
