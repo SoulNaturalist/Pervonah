@@ -7,7 +7,13 @@ LOGIN = 'number'
 
 PASSW = 'user password'
 
-DELAY = 4
+DELAY = 6.6
+
+BANNER = '''
+▒█░░▒█ ▒█░▄▀ 　 ▒█▀▀█ ▒█▀▀▀ ▒█▀▀█ ▒█░░▒█ ▒█▀▀▀█ ▒█▄░▒█ ░█▀▀█ ▒█░▒█ 
+░▒█▒█░ ▒█▀▄░ 　 ▒█▄▄█ ▒█▀▀▀ ▒█▄▄▀ ░▒█▒█░ ▒█░░▒█ ▒█▒█▒█ ▒█▄▄█ ▒█▀▀█ 
+░░▀▄▀░ ▒█░▒█ 　 ▒█░░░ ▒█▄▄▄ ▒█░▒█ ░░▀▄▀░ ▒█▄▄▄█ ▒█░░▀█ ▒█░▒█ ▒█░▒█
+'''
 
 mess_unput = [
 
@@ -28,7 +34,19 @@ api = api.get_api()
 
 groups  = api.groups.get(filter='groups, publics', count=200)
 
+account_info = api.account.getProfileInfo()
+
+acount_name = account_info['first_name']
+
+acount_lastname = account_info['last_name']
+
+acount_id = account_info['id']
+
 groups_ids = groups['items'] 
+
+print(BANNER)
+
+print(f'Активный аккаунт {acount_name} {acount_lastname} id{acount_id}.')
 
 while True:
     time.sleep(DELAY)
@@ -52,7 +70,11 @@ while True:
                     comment = api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text)
                     comment_id = comment['comment_id']
                     api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
-                    print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' +  message_text)
+                    print(f'''Комментарий оставлен ✅
+                    Ссылка на комментарий - https://vk.com/wall{sourceID}_{postID}
+                    Когда был оставлен комментарий - {strftime('[%H:%M:%S]')}
+                    Сообщение оставил: {message_text}
+                    ''')
                         
                 else:
                     random_photo = random.choice(photos)
@@ -60,7 +82,11 @@ while True:
                     comment = api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text, attachments=random_photo)
                     comment_id = comment['comment_id'] 
                     api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
-                    print('Комментарий оставлен ' + 'https://vk.com/wall' + str(sourceID) + '_' + str(postID) + ' |' + str(strftime('[%H:%M:%S]')) + ' |' + 'Сообщение оставил : ' +  message_text)
+                    print(f'''Комментарий оставлен ✅
+                    Ссылка на комментарий - https://vk.com/wall{sourceID}_{postID}
+                    Когда был оставлен комментарий - {strftime('[%H:%M:%S]')}
+                    Сообщение оставил: {message_text}
+                    ''')
         except vk_api.exceptions.Captcha as captcha:
             captcha.sid  
             print(f'Появилась капча - {captcha.get_url()}')
