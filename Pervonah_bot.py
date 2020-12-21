@@ -73,7 +73,7 @@ while True:
                     print(f'''Комментарий оставлен ✅
                     Ссылка на комментарий - https://vk.com/wall{sourceID}_{postID}
                     Когда был оставлен комментарий - {strftime('[%H:%M:%S]')}
-                    Сообщение оставил: {message_text}
+                    Сообщение: {message_text}
                     ''')
                         
                 else:
