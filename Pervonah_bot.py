@@ -1,16 +1,19 @@
+import os
 import time
 import vk_api 
 import random
 import requests
 from time import gmtime, strftime
+from colorama import Fore, Back, Style
 
-LOGIN = 'number'
+
+LOGIN = 'your login'
 
 PASSW = 'password'
 
 DELAY = 6.6
 
-mess_unput = []
+list_message = ['1 message', '2 message']
 
 photos = []
 
@@ -24,7 +27,7 @@ BANNER = '''
 
 active_sesion = requests.Session()
 
-active_sesion.proxies.update({'http': 'http://172.67.182.109:80'})
+active_sesion.proxies.update({'http': 'http://proxy:port'})
 
 api = vk_api.VkApi(LOGIN, PASSW, session=active_sesion)
 
@@ -44,7 +47,9 @@ acount_id = account_info['id']
 
 groups_ids = groups['items'] 
 
-print(BANNER)
+
+os.system('clear')
+print(Fore.BLUE + BANNER)
 print(f'Активный аккаунт {acount_name} {acount_lastname} {acount_id}ID')
 
 while True:
@@ -63,18 +68,18 @@ while True:
         sourceID = post['items'][0]['owner_id']
         try:
             if postID not in list_ids:
-                message_text = random.choice(mess_unput)
+                message_text = random.choice(list_message)
                 if not photos:
                     list_ids.append(postID)
                     comment = api.wall.createComment(owner_id=sourceID,post_id=postID,message=message_text)
                     comment_id = comment['comment_id']
                     api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
-                    print(f'''
-                    Комментарий оставлен ✅
-                    Ссылка на комментарий - https://vk.com/wall{sourceID}_{postID}
-                    Когда был оставлен комментарий - {strftime('%H:%M:%S')}
-                    Сообщение: {message_text}
-                    ''')
+                    
+                    print(f'''\n-----------------------------------------------------------------
+                    \nКомментарий оставлен ✅
+                    \nСсылка на комментарий - https://vk.com/wall{sourceID}_{postID}
+                    \nКогда был оставлен комментарий - {strftime('%H:%M:%S')}
+                    \nСообщение: {message_text}''')
                         
                 else:
                     random_photo = random.choice(photos)
@@ -83,11 +88,14 @@ while True:
                     comment_id = comment['comment_id'] 
                     api.likes.add(type='comment', owner_id=sourceID, item_id=comment_id)
                     print(f'''
+                    -----------------------------------------------------------------
                     Комментарий оставлен ✅
                     Ссылка на комментарий - https://vk.com/wall{sourceID}_{postID}
                     Когда был оставлен комментарий - {strftime('%H:%M:%S')}
-                    Сообщение оставил: {message_text}
+                    Сообщение: {message_text}
+                    -----------------------------------------------------------------
                     ''')
+                   
         except vk_api.exceptions.Captcha as captcha:
             captcha.sid  
             print(f'Появилась капча - {captcha.get_url()}')
