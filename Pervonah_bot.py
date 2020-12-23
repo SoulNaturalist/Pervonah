@@ -24,7 +24,7 @@ BANNER = '''
 
 active_sesion = requests.Session()
 
-active_sesion.proxies.update({'http': 'http://172.67.182.109:80'})
+active_sesion.proxies.update({'http': 'http://proxy:port'})
 
 api = vk_api.VkApi(LOGIN, PASSW, session=active_sesion)
 
