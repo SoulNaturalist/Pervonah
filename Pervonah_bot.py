@@ -4,11 +4,17 @@ import random
 import requests
 from time import gmtime, strftime
 
-LOGIN = 'user name'
+LOGIN = 'number'
 
 PASSW = 'password'
 
 DELAY = 6.6
+
+mess_unput = []
+
+photos = []
+
+list_ids = []
 
 BANNER = '''
 ▒█░░▒█ ▒█░▄▀ 　 ▒█▀▀█ ▒█▀▀▀ ▒█▀▀█ ▒█░░▒█ ▒█▀▀▀█ ▒█▄░▒█ ░█▀▀█ ▒█░▒█ 
@@ -18,13 +24,7 @@ BANNER = '''
 
 active_sesion = requests.Session()
 
-active_sesion.proxies.update({'http': 'http://your_proxy'})
-
-mess_unput = []
-
-photos = []
-
-list_ids = []
+active_sesion.proxies.update({'http': 'http://172.67.182.109:80'})
 
 api = vk_api.VkApi(LOGIN, PASSW, session=active_sesion)
 
