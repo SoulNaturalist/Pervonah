@@ -3,13 +3,14 @@ import time
 import vk_api 
 import random
 import requests
+from sys import platform
 from time import gmtime, strftime
 from colorama import Fore, Back, Style
 
 
-LOGIN = 'login'
+LOGIN = ''
 
-PASSW = 'password'
+PASSW = ''
 
 DELAY = 6.6
 
@@ -47,8 +48,10 @@ acount_id = account_info['id']
 
 groups_ids = groups['items'] 
 
-
-os.system('clear')
+if platform == "linux" or platform == "linux2":
+    os.system('clear')
+elif platform == "win32":
+    os.system('cls')
 print(Fore.BLUE + BANNER)
 print(f'Активный аккаунт {acount_name} {acount_lastname} {acount_id}ID')
 
