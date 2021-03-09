@@ -7,12 +7,13 @@ from sys import platform
 from time import gmtime, strftime
 from colorama import Fore, Back, Style
 
-
 LOGIN = ''
 
 PASSW = ''
 
 DELAY = 6.6
+
+PROXY = False
 
 list_message = []
 
@@ -26,15 +27,23 @@ BANNER = '''
 ░░▀▄▀░ ▒█░▒█ 　 ▒█░░░ ▒█▄▄▄ ▒█░▒█ ░░▀▄▀░ ▒█▄▄▄█ ▒█░░▀█ ▒█░▒█ ▒█░▒█
 '''
 
-active_sesion = requests.Session()
 
-active_sesion.proxies.update({'http': 'http://203.30.189.46:80'})
+if PROXY:
+    active_sesion = requests.Session()
 
-api = vk_api.VkApi(LOGIN, PASSW, session=active_sesion)
+    active_sesion.proxies.update({'http': 'http://203.30.189.46:80'})
 
-api.auth()
+    api = vk_api.VkApi(LOGIN, PASSW, session=active_sesion)
 
-api = api.get_api()
+    api.auth()
+
+    api = api.get_api()
+elif not PROXY:
+    api = vk_api.VkApi(LOGIN, PASSW)
+
+    api.auth()
+
+    api = api.get_api()
 
 groups  = api.groups.get(filter='groups, publics', count=200)
 
@@ -114,7 +123,6 @@ while True:
 Сообщение: {message_text}
 -----------------------------------------------------------------
                     ''')
-                   
     except vk_api.exceptions.Captcha as captcha:
         captcha.sid  
         print(f'Появилась капча - {captcha.get_url()}')
