@@ -69,12 +69,16 @@ while True:
         time.sleep(DELAY)
 
         post = api.wall.get(filters='owner',counts=1,owner_id=f'-{random.choice(groups_ids)}')
-
-        comments = post['items'][0]['comments']['count']
-
-        like = post['items'][0]['likes']['count']
+        try:
+            comments = post['items'][0]['comments']['count']
+        except IndexError:
+            comments = 0
+        try:
+            likes = post['items'][0]['likes']['count']
+        except IndexError:
+            likes = 0
     
-        if comments < 5 and like < 90:
+        if comments < 5 and likes < 90:
             postID = post['items'][0]['id']
 
             sourceID = post['items'][0]['owner_id']
