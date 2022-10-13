@@ -137,10 +137,3 @@ class MainStart(VK_Sender):
     if __name__ == "__main__":
         Started_class = VK_Sender()
         Started_class.starting()
-        
-        
-
-    
-
-
-
